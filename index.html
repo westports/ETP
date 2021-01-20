@@ -127,7 +127,7 @@
                         if(typeof rowCells[18]!="undefined" && $.trim(rowCells[18])!="" && $.trim(rowCells[18])!="/") {
                           edi += "FTX+HAN++"+rowCells[18]+"'\n"; line++;
                         }
-                        if(typeof rowCells[18]!="undefined") { edi += "NAD+CF+"+rowCells[18]+":160:ZZZ'\n"; line++; } //box 
+                        if(typeof rowCells[18]!="undefined" && $.trim(rowCells[18])!="") { edi += "NAD+CF+"+rowCells[18]+":160:ZZZ'\n"; line++; } //box 
                         if(opr!="") { edi += "NAD+CA+"+opr+":160:ZZZ'\n"; line++; } //vsl
                         if(typeof rowCells[27]!="undefined" && $.trim(rowCells[27])!="")  { edi += "NAD+GF+"+rowCells[27]+":160:ZZZ'\n"; line++; } //slot
                     }                    
