@@ -33,15 +33,14 @@
                 //console.log(XL_row_object)
                 //console.log(json_object);
                 var line = 0;
-                var contcount = 0;
+                var contcount = 1;
                 var allRows = XL_row_object.split(/\r?\n|\r/);
-                var table = '<table>';
+                //var table = '<table>';
                 var dt = new Date();
                 var refno = get_date_str(dt, "");
-                var edi = "UNB+UNOC:4+PSA+WPT+"+$("#recv_code").val()+"+"+get_date_str(dt, "daterawonly")+":"+get_date_str(dt, "timetominrawonly")+"+"+refno+"'\n";
-                edi += "UNH+"+refno+"+COPRAR:D:00B:UN:SMDG21+LOADINGCOPRAR'\n";
-                line++;
-                
+                var edi = "UNB+UNOC:4+PSA+WPT+"+$("#recv_code").val()+"+"+get_date_str(dt, "daterawonly")+":"+get_date_str(dt, "timetominrawonly")+"+"+refno+"'\n"; 
+                edi += "UNH+"+refno+"+COPRAR:D:00B:UN:SMDG21+LOADINGCOPRAR'\n"; line++;
+                                
                 //process header
                 var report_dt = ""; var voyage = ""; var vslname = ""; var callsign = ""; var opr = "";
                 for (var singleRow = 0; singleRow < allRows.length; singleRow++) {
@@ -70,11 +69,18 @@
                     let rowCells = allRows[singleRow].split(',');
                     if(singleRow>7) {
                         contcount++;
-                        if(typeof rowCells[1]!="undefined" && typeof rowCells[7]!="undefined") edi += "EQD+CN+"+rowCells[1]+"+"+rowCells[7]+":102:5+++5'\n"; line++;
-                        if(typeof rowCells[6]!="undefined") edi += "LOC+11+"+rowCells[6]+":139:6'\n"; line++;
-                        if(typeof rowCells[19]!="undefined") edi += "LOC+9+"+rowCells[19]+":139:6'\n"; line++;
-                        if(typeof rowCells[13]!="undefined") edi += "MEA+AAE+VGM+KGM:"+rowCells[13]+"'\n"; line++;
-                        if(typeof rowCells[8]!="undefined") edi += "FTX+AAI+++"+rowCells[8]+"'\n"; line++;
+                        //rowCells[3] //5 - F, 4 - E
+                        let fe = "5";
+                        if(typeof rowCells[3]!="undefined" && rowCells[3]=="E") fe = "4";
+                        //2 TS - N, 6 TS - Y
+                        let type = "2";
+                        if(typeof rowCells[11]!="undefined" && rowCells[11]=="Y") type = "6";
+                        
+                        if(typeof rowCells[1]!="undefined" && typeof rowCells[7]!="undefined") { edi += "EQD+CN+"+rowCells[1]+"+"+rowCells[7]+":102:5++"+type+"+"+fe+"'\n"; line++; }
+                        if(typeof rowCells[6]!="undefined") { edi += "LOC+11+"+rowCells[6]+":139:6'\n"; line++; }
+                        if(typeof rowCells[19]!="undefined") { edi += "LOC+9+"+rowCells[19]+":139:6'\n"; line++; }
+                        if(typeof rowCells[13]!="undefined") { edi += "MEA+AAE+VGM+KGM:"+rowCells[13]+"'\n"; line++; }
+                        if(typeof rowCells[8]!="undefined") { edi += "FTX+AAI+++"+rowCells[8]+"'\n"; line++; }
                         if(typeof rowCells[14]!="undefined" && rowCells[14]!="" && $.trim(rowCells[14])!="/") {
                           tmp = rowCells[14].split('/');
                           edi += "DGS+IMD+"+tmp[0]+"+"+tmp[1]+"'\n"; line++;
@@ -121,9 +127,9 @@
                         if(typeof rowCells[18]!="undefined" && $.trim(rowCells[18])!="" && $.trim(rowCells[18])!="/") {
                           edi += "FTX+HAN++"+rowCells[18]+"'\n"; line++;
                         }
-                        if(typeof rowCells[18]!="undefined") edi += "NAD+CF+"+rowCells[18]+":160:ZZZ'\n"; line++;//box
+                        if(typeof rowCells[18]!="undefined") { edi += "NAD+CF+"+rowCells[18]+":160:ZZZ'\n"; line++; } //box 
                         edi += "NAD+CA+"+opr+":160:ZZZ'\n"; line++; //vsl
-                        if(typeof rowCells[27]!="undefined") edi += "NAD+GF+"+rowCells[27]+":160:ZZZ'\n"; line++; //slot
+                        if(typeof rowCells[27]!="undefined" && $.trim(rowCells[27])!="")  { edi += "NAD+GF+"+rowCells[27]+":160:ZZZ'\n"; line++; } //slot
                     }                    
 
                     /*if (singleRow === 0) {
