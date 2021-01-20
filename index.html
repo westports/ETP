@@ -190,7 +190,7 @@
                 oFileIn.addEventListener('change', filePicked, false);
             }
             $("#recv_code").keyup(function(){
-              reader.onload()
+              parseExcel(oFile)
             })
         });
 
