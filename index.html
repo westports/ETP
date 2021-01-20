@@ -33,7 +33,7 @@
                 //console.log(XL_row_object)
                 //console.log(json_object);
                 var line = 0;
-                var contcount = 1;
+                var contcount = 0;
                 var allRows = XL_row_object.split(/\r?\n|\r/);
                 //var table = '<table>';
                 var dt = new Date();
@@ -159,6 +159,7 @@
                     }*/
                   }
                 } 
+                contcount--;
                 edi += "CNT+16:"+contcount+"'\n"; line++; line++;
                 edi += "UNT+"+line+"+"+refno+"'\n";
                 edi += "UNZ+1+"+refno+"'";
