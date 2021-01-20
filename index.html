@@ -51,7 +51,7 @@
                         let day = tmpdt[0];
                         let month = tmpdt[1];
                         let tmpyear = tmpdt[2].split(' ');
-                        let report_date = new Date(tmpyear[0] + "" + month + "" + day + " " + tmpyear[1]);
+                        let report_date = new Date(tmpyear[0] + "-" + month + "-" + day + " " + tmpyear[1]);
                         console.log(tmpyear[0] + "" + month + "" + day + " " + tmpyear[1])
                         report_dt = get_date_str(report_date, "");
                     }
