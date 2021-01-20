@@ -47,7 +47,7 @@
                     if(singleRow>6) break;
                     let rowCells = allRows[singleRow].split(',');
                     if(singleRow==1) {
-                        let report_date = new Date(rowCells[1]);
+                        let report_date = new Date(rowCells[1].replace("'", ""));
                         report_dt = get_date_str(report_date, "");
                     }
                     if(singleRow==3) {
