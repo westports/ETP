@@ -122,12 +122,12 @@
                           edi += "TMP+2+"+rowCells[15]+":CEL'\n"; line++;
                         }
                         if(typeof rowCells[12]!="undefined" && $.trim(rowCells[12])!="" && $.trim(rowCells[12])!="/") {
-                          edi += "FTX+AAA+++"+rowCells[12]+"'\n"; line++;
+                          edi += "FTX+AAA+++"+$.trim(rowCells[12])+"'\n"; line++;
                         }
                         if(typeof rowCells[18]!="undefined" && $.trim(rowCells[18])!="" && $.trim(rowCells[18])!="/") {
                           edi += "FTX+HAN++"+rowCells[18]+"'\n"; line++;
                         }
-                        if(typeof rowCells[18]!="undefined" && $.trim(rowCells[18])!="") { edi += "NAD+CF+"+rowCells[18]+":160:ZZZ'\n"; line++; } //box 
+                        if(typeof rowCells[2]!="undefined" && $.trim(rowCells[2])!="") { edi += "NAD+CF+"+rowCells[2]+":160:ZZZ'\n"; line++; } //box 
                         if(opr!="") { edi += "NAD+CA+"+opr+":160:ZZZ'\n"; line++; } //vsl
                         if(typeof rowCells[27]!="undefined" && $.trim(rowCells[27])!="")  { edi += "NAD+GF+"+rowCells[27]+":160:ZZZ'\n"; line++; } //slot
                     }                    
@@ -238,11 +238,12 @@
         <div class="card-body">
             <h5 class="card-title">Export Booking Excel to Coprar Converter</h5>
             <div class="form-group">
-                <label for="my_file_input">Export booking excel file:</label><input class="form-control" type="file" id="my_file_input" />
-                <p><small><a href="sample.xls">Sample Excel</a></small></p>
+                <label for="recv_code">Receiver Code:</label><input class="form-control" type="text" id="recv_code" value="RECEIVER" />
+                <p><small>Please enter before file select.</small></p>
             </div>
             <div class="form-group">
-                <label for="recv_code">Receiver Code:</label><input class="form-control" type="text" id="recv_code" value="RECEIVER" />
+                <label for="my_file_input">Export booking excel file:</label><input class="form-control" type="file" id="my_file_input" />
+                <p><small><a href="sample.xlsx">Sample Excel</a></small></p>
             </div>
             <div class="form-group"><textarea class="form-control" rows="20" cols="40" id='my_file_output'></textarea></div>
         </div>
