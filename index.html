@@ -15,7 +15,7 @@
   </head>
   <body>          
         <script>
-          
+
           parseExcel = function(file) {
             var reader = new FileReader();
 
@@ -46,12 +46,8 @@
                 for (var singleRow = 0; singleRow < allRows.length; singleRow++) {
                     if(singleRow>6) break;
                     let rowCells = allRows[singleRow].split(',');
-                    if(singleRow==1) {                        
-                        let tmpdt = rowCells[1].split('/');
-                        let day = tmpdt[0];
-                        let month = tmpdt[1];
-                        let tmpyear = tmpdt[2].split(' ');
-                        let report_date = new Date(tmpyear[0] + "-" + month + "-" + day + " " + tmpyear[1]);
+                    if(singleRow==1) {
+                        let report_date = new Date(rowCells[1]);
                         report_dt = get_date_str(report_date, "");
                     }
                     if(singleRow==3) {
@@ -189,9 +185,6 @@
             if(oFileIn.addEventListener) {
                 oFileIn.addEventListener('change', filePicked, false);
             }
-            $("#recv_code").keyup(function(){
-              
-            })
         });
 
 
@@ -243,9 +236,10 @@
 <div class="container">
     <div class="card" style="">
         <div class="card-body">
-            <h5 class="card-title">Westports ETP Export Booking Excel to Coprar Converter</h5>
+            <h5 class="card-title">Export Booking Excel to Coprar Converter</h5>
             <div class="form-group">
                 <label for="my_file_input">Export booking excel file:</label><input class="form-control" type="file" id="my_file_input" />
+                <p><small><a href="sample.xls">Sample Excel</a></small></p>
             </div>
             <div class="form-group">
                 <label for="recv_code">Receiver Code:</label><input class="form-control" type="text" id="recv_code" value="RECEIVER" />
