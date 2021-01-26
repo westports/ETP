@@ -38,7 +38,7 @@
                 //var table = '<table>';
                 var dt = new Date();
                 var refno = get_date_str(dt, "");
-                var edi = "UNB+UNOC:4+PSA+WPT+"+$("#recv_code").val()+"+"+get_date_str(dt, "daterawonly")+":"+get_date_str(dt, "timetominrawonly")+"+"+refno+"'\n"; 
+                var edi = "UNB+UNOA:4+KMT+"+$("#recv_code").val()+"+"+get_date_str(dt, "daterawonly")+":"+get_date_str(dt, "timetominrawonly")+"+"+refno+"'\n"; 
                 edi += "UNH+"+refno+"+COPRAR:D:00B:UN:SMDG21+LOADINGCOPRAR'\n"; line++;
                                 
                 //process header
@@ -61,7 +61,7 @@
                     }
                 }                
                 edi += "BGM+45+"+report_dt+"+5'\n"; line++;
-                edi += "TDT+20+"+voyage+"+1++172:ZZZ+++"+callsign+":103::"+vslname+"'\n"; line++;
+                edi += "TDT+20+"+voyage+"+1++172:"+opr+"+++"+callsign+":103::"+vslname+"'\n"; line++;
                 edi += "RFF+VON:"+voyage+"'\n"; line++;
                 let tmp; let dim;
                 for (singleRow = 0; singleRow < allRows.length; singleRow++) {
@@ -128,8 +128,8 @@
                           edi += "FTX+HAN++"+rowCells[18]+"'\n"; line++;
                         }
                         if(typeof rowCells[2]!="undefined" && $.trim(rowCells[2])!="") { edi += "NAD+CF+"+rowCells[2]+":160:ZZZ'\n"; line++; } //box 
-                        if(opr!="") { edi += "NAD+CA+"+opr+":160:ZZZ'\n"; line++; } //vsl
-                        if(typeof rowCells[27]!="undefined" && $.trim(rowCells[27])!="")  { edi += "NAD+GF+"+rowCells[27]+":160:ZZZ'\n"; line++; } //slot
+                        //if(opr!="") { edi += "NAD+CA+"+opr+":160:ZZZ'\n"; line++; } //vsl
+                        //if(typeof rowCells[27]!="undefined" && $.trim(rowCells[27])!="")  { edi += "NAD+GF+"+rowCells[27]+":160:ZZZ'\n"; line++; } //slot
                     }                    
 
                     /*if (singleRow === 0) {
