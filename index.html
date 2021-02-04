@@ -38,7 +38,7 @@
                 //var table = '<table>';
                 var dt = new Date();
                 var refno = get_date_str(dt, "");
-                var edi = "UNB+UNOA:4+KMT+"+$("#recv_code").val()+"+"+get_date_str(dt, "daterawonly")+":"+get_date_str(dt, "timetominrawonly")+"+"+refno+"'\n"; 
+                var edi = "UNB+UNOA:2+KMT+"+$("#recv_code").val()+"+"+get_date_str(dt, "daterawonly")+":"+get_date_str(dt, "timetominrawonly")+"+"+refno+"'\n"; 
                 edi += "UNH+"+refno+"+COPRAR:D:00B:UN:SMDG21+LOADINGCOPRAR'\n"; line++;
                                 
                 //process header
@@ -65,8 +65,9 @@
                     }
                 }                
                 edi += "BGM+45+"+report_dt+"+5'\n"; line++;
-                edi += "TDT+20+"+voyage+"+1++172:"+opr+"+++"+callsign+":103::"+vslname+"'\n"; line++;
+                edi += "TDT+20+"+voyage+"+1++172:"+opr+"+++"+$("#callsign_code").val()+":103::"+vslname+"'\n"; line++;
                 edi += "RFF+VON:"+voyage+"'\n"; line++;
+                edi += "NAD+CA+"+opr+"'\n"; line++;
                 let tmp; let dim;
                 for (singleRow = 0; singleRow < allRows.length; singleRow++) {
                   if(typeof allRows[singleRow]!="undefined") {
@@ -81,7 +82,8 @@
                         if(typeof rowCells[11]!="undefined" && rowCells[11]=="Y") type = "6";
                         
                         if(typeof rowCells[1]!="undefined" && typeof rowCells[7]!="undefined") { edi += "EQD+CN+"+rowCells[1]+"+"+rowCells[7]+":102:5++"+type+"+"+fe+"'\n"; line++; }
-                        if(typeof rowCells[6]!="undefined") { edi += "LOC+11+"+rowCells[6]+":139:6'\n"; line++; }
+                        if(typeof rowCells[6]!="undefined") { edi += "LOC+11+"+rowCells[5]+":139:6'\n"; line++; }
+                        if(typeof rowCells[6]!="undefined") { edi += "LOC+7+"+rowCells[6]+":139:6'\n"; line++; }
                         if(typeof rowCells[19]!="undefined") { edi += "LOC+9+"+rowCells[19]+":139:6'\n"; line++; }
                         if(typeof rowCells[13]!="undefined") { edi += "MEA+AAE+VGM+KGM:"+rowCells[13]+"'\n"; line++; }
                         if(typeof rowCells[8]!="undefined") { edi += "FTX+AAI+++"+rowCells[8]+"'\n"; line++; }
@@ -243,6 +245,10 @@
             <h5 class="card-title">Export Booking Excel to Coprar Converter</h5>
             <div class="form-group">
                 <label for="recv_code">Receiver Code:</label><input class="form-control" type="text" id="recv_code" value="RECEIVER" />
+                <p><small>Please change before file select.</small></p>
+            </div>
+            <div class="form-group">
+                <label for="recv_code">Callsign Code:</label><input class="form-control" type="text" id="callsign_code" value="XXXXX" />
                 <p><small>Please change before file select.</small></p>
             </div>
             <div class="form-group">
