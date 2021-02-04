@@ -87,18 +87,6 @@
                         if(typeof rowCells[6]!="undefined") { edi += "LOC+7+"+rowCells[6]+":139:6'\n"; line++; }
                         if(typeof rowCells[19]!="undefined") { edi += "LOC+9+"+rowCells[19]+":139:6'\n"; line++; }
                         if(typeof rowCells[13]!="undefined") { edi += "MEA+AAE+VGM+KGM:"+rowCells[13]+"'\n"; line++; }
-                        if(typeof rowCells[15]!="undefined" && $.trim(rowCells[15])!="" && $.trim(rowCells[15])!="/") {
-                          let temperature = rowCells[15];
-                          temperature = temperature.replace(" ", "");
-                          temperature = temperature.replace("C", "");
-                          temperature = temperature.replace("+", "");
-                          edi += "TMP+2+"+temperature+":CEL'\n"; line++;
-                        }
-                        if(typeof rowCells[8]!="undefined") { edi += "FTX+AAI+++"+rowCells[8]+"'\n"; line++; }
-                        if(typeof rowCells[14]!="undefined" && rowCells[14]!="" && $.trim(rowCells[14])!="/") {
-                          tmp = rowCells[14].split('/');
-                          edi += "DGS+IMD+"+tmp[0]+"+"+tmp[1]+"'\n"; line++;
-                        }
                         if(typeof rowCells[17]!="undefined" && $.trim(rowCells[17])!="" && $.trim(rowCells[17])!="/") {
                           tmp = rowCells[17].split(',');
                           for(let i=0; i<tmp.length; i++) {
@@ -120,6 +108,13 @@
                               }
                           }
                         }
+                        if(typeof rowCells[15]!="undefined" && $.trim(rowCells[15])!="" && $.trim(rowCells[15])!="/") {
+                          let temperature = rowCells[15];
+                          temperature = temperature.replace(" ", "");
+                          temperature = temperature.replace("C", "");
+                          temperature = temperature.replace("+", "");
+                          edi += "TMP+2+"+temperature+":CEL'\n"; line++;
+                        }
                         if(typeof rowCells[25]!="undefined" && $.trim(rowCells[25])!="" && $.trim(rowCells[25])!="/") {
                           let tmp = rowCells[25].split(',');
                           if(tmp[0]=="L") {
@@ -132,12 +127,17 @@
                               edi += "SEL+"+tmp[1]+"+CU'\n"; line++; //seal L - CA, S - SH, M - CU
                           }
                         }
+                        if(typeof rowCells[8]!="undefined") { edi += "FTX+AAI+++"+rowCells[8]+"'\n"; line++; }                      
                         
                         if(typeof rowCells[12]!="undefined" && $.trim(rowCells[12])!="" && $.trim(rowCells[12])!="/") {
                           edi += "FTX+AAA+++"+$.trim(cleanString(rowCells[12]))+"'\n"; line++;
                         }
                         if(typeof rowCells[18]!="undefined" && $.trim(rowCells[18])!="" && $.trim(rowCells[18])!="/") {
                           edi += "FTX+HAN++"+rowCells[18]+"'\n"; line++;
+                        }
+                        if(typeof rowCells[14]!="undefined" && rowCells[14]!="" && $.trim(rowCells[14])!="/") {
+                          tmp = rowCells[14].split('/');
+                          edi += "DGS+IMD+"+tmp[0]+"+"+tmp[1]+"'\n"; line++;
                         }
                         if(typeof rowCells[2]!="undefined" && $.trim(rowCells[2])!="") { edi += "NAD+CF+"+rowCells[2]+":160:ZZZ'\n"; line++; } //box 
                         //if(opr!="") { edi += "NAD+CA+"+opr+":160:ZZZ'\n"; line++; } //vsl
