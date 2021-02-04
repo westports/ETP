@@ -87,6 +87,13 @@
                         if(typeof rowCells[6]!="undefined") { edi += "LOC+7+"+rowCells[6]+":139:6'\n"; line++; }
                         if(typeof rowCells[19]!="undefined") { edi += "LOC+9+"+rowCells[19]+":139:6'\n"; line++; }
                         if(typeof rowCells[13]!="undefined") { edi += "MEA+AAE+VGM+KGM:"+rowCells[13]+"'\n"; line++; }
+                        if(typeof rowCells[15]!="undefined" && $.trim(rowCells[15])!="" && $.trim(rowCells[15])!="/") {
+                          let temperature = rowCells[15];
+                          temperature = temperature.replace(" ", "");
+                          temperature = temperature.replace("C", "");
+                          temperature = temperature.replace("+", "");
+                          edi += "TMP+2+"+temperature+":CEL'\n"; line++;
+                        }
                         if(typeof rowCells[8]!="undefined") { edi += "FTX+AAI+++"+rowCells[8]+"'\n"; line++; }
                         if(typeof rowCells[14]!="undefined" && rowCells[14]!="" && $.trim(rowCells[14])!="/") {
                           tmp = rowCells[14].split('/');
@@ -125,11 +132,9 @@
                               edi += "SEL+"+tmp[1]+"+CU'\n"; line++; //seal L - CA, S - SH, M - CU
                           }
                         }
-                        if(typeof rowCells[15]!="undefined" && $.trim(rowCells[15])!="" && $.trim(rowCells[15])!="/") {
-                          edi += "TMP+2+"+rowCells[15]+":CEL'\n"; line++;
-                        }
+                        
                         if(typeof rowCells[12]!="undefined" && $.trim(rowCells[12])!="" && $.trim(rowCells[12])!="/") {
-                          edi += "FTX+AAA+++"+$.trim(rowCells[12])+"'\n"; line++;
+                          edi += "FTX+AAA+++"+$.trim(cleanString(rowCells[12]))+"'\n"; line++;
                         }
                         if(typeof rowCells[18]!="undefined" && $.trim(rowCells[18])!="" && $.trim(rowCells[18])!="/") {
                           edi += "FTX+HAN++"+rowCells[18]+"'\n"; line++;
@@ -264,6 +269,16 @@
             if (/,\s*$/.test(text)) a.push('');
             return a;
         };
+        
+        function cleanString(input) {
+            var output = "";
+            for (var i=0; i<input.length; i++) {
+                if (input.charCodeAt(i) <= 127) {
+                    output += input.charAt(i);
+                }
+            }
+            return output;
+        }
 </script>
 <div class="container">
     <div class="card" style="">
