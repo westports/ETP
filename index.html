@@ -81,6 +81,7 @@
                 for (singleRow = 0; singleRow < allRows.length; singleRow++) {
                   if(typeof allRows[singleRow]!="undefined") {
                     //let rowCells = allRows[singleRow].split(',');
+                    try {
                     let rowCells = CSVtoArray(allRows[singleRow]);
                     if(singleRow>7) {
                         contcount++;
@@ -179,6 +180,8 @@
                       table += '</tr>';
                     }*/
                   }
+                  
+                  } catch(err) {console.log(err)}
                 } 
                 contcount--;
                 edi += "CNT+16:"+contcount+"'\n"; line++; line++;
