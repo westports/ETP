@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Export Booking Excel to Coprar Converter for ETP 3.0</title>
+    <title>Export Booking Excel to Coprar Converter</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
@@ -63,7 +63,7 @@
                     for (var singleRow = 0; singleRow < allRows.length; singleRow++) {
                         if (singleRow > 6) break;
                         let rowCells = allRows[singleRow].split(',');
-                        console.log(singleRow, rowCells);
+
                         if (singleRow == 1) {
                             let tmpdt = rowCells[1].split('/');
                             let day = tmpdt[0];
@@ -76,7 +76,6 @@
                             vslname = rowCells[1];
                         }
                         if (singleRow == 5) {
-                            console.log(rowCells);
                             voyage = rowCells[3];
                             opr = rowCells[1];
                         }
@@ -122,36 +121,36 @@
                                         edi += "LOC+7+" + rowCells[6] + ":139:6'\n"; 
                                         line++;
                                     }
-                                    if (typeof rowCells[18] != "undefined") { 
-                                        edi += "LOC+9+" + rowCells[18] + ":139:6'\n"; 
+                                    if (typeof rowCells[19] != "undefined") { 
+                                        edi += "LOC+9+" + rowCells[19] + ":139:6'\n"; 
                                         line++;
                                     }
                                     if (typeof rowCells[13] != "undefined") { 
                                         edi += "MEA+AAE+VGM+KGM:" + rowCells[13] + "'\n"; 
                                         line++;
                                     }
-                                    if (typeof rowCells[16] != "undefined" && $.trim(rowCells[16]) != "" && $.trim(rowCells[16]) != "/") { 
-                                        tmp = rowCells[16].split(','); 
+                                    if (typeof rowCells[17] != "undefined" && $.trim(rowCells[17]) != "" && $.trim(rowCells[17]) != "/") { 
+                                        tmp = rowCells[17].split(','); 
                                         for (let i = 0; i < tmp.length; i++) {
-                                            dim = rowCells[16].split('/'); 
-                                            if ($.trim(dim[0]) == "OF") {
-                                                edi += "DIM+5+CMT:" + $.trim(dim[1]) + "'\n";
+                                            dim = rowCells[17].split('/'); 
+                                            if ($.trim(dim[0]) == "OF") { 
+                                                edi += "DIM+5+CMT:" + $.trim(dim[1]) + "'\n"; 
                                                 line++;
                                             }
-                                            if ($.trim(dim[0]) == "OB") {
-                                                edi += "DIM+6+CMT:" + $.trim(dim[1]) + "'\n";
+                                            if ($.trim(dim[0]) == "OB") { 
+                                                edi += "DIM+6+CMT:" + $.trim(dim[1]) + "'\n"; 
                                                 line++;
                                             }
-                                            if ($.trim(dim[0]) == "OR") {
-                                                edi += "DIM+7+CMT::" + $.trim(dim[1]) + "'\n";
+                                            if ($.trim(dim[0]) == "OR") { 
+                                                edi += "DIM+7+CMT::" + $.trim(dim[1]) + "'\n"; 
                                                 line++;
                                             }
                                             if ($.trim(dim[0]) == "OL") {
-                                                edi += "DIM+8+CMT::" + $.trim(dim[1]) + "'\n";
+                                                edi += "DIM+8+CMT::" + $.trim(dim[1]) + "'\n"; 
                                                 line++;
                                             }
                                             if ($.trim(dim[0]) == "OH") {
-                                                edi += "DIM+9+CMT:::" + $.trim(dim[1]) + "'\n";
+                                                edi += "DIM+9+CMT:::" + $.trim(dim[1]) + "'\n"; 
                                                 line++;
                                             }
                                         }
@@ -164,18 +163,18 @@
                                         edi += "TMP+2+" + temperature + ":CEL'\n";
                                         line++;
                                     }
-                                    if (typeof rowCells[24] != "undefined" && $.trim(rowCells[24]) != "" && $.trim(rowCells[24]) != "/") { 
-                                        let tmp = rowCells[24].split(','); 
-                                        if (tmp[0] == "L") { 
-                                            edi += "SEL+" + tmp[1] + "+CA'\n";
+                                    if (typeof rowCells[25] != "undefined" && $.trim(rowCells[25]) != "" && $.trim(rowCells[25]) != "/") { 
+                                        let tmp = rowCells[25].split(','); 
+                                        if (tmp[0] == "L") {
+                                            edi += "SEL+" + tmp[1] + "+CA'\n"; 
                                             line++; //seal L - CA, S - SH, M - CU
                                         }
                                         if (tmp[0] == "S") {
-                                            edi += "SEL+" + tmp[1] + "+SH'\n";
+                                            edi += "SEL+" + tmp[1] + "+SH'\n"; 
                                             line++; //seal L - CA, S - SH, M - CU
                                         }
                                         if (tmp[0] == "M") {
-                                            edi += "SEL+" + tmp[1] + "+CU'\n";
+                                            edi += "SEL+" + tmp[1] + "+CU'\n"; 
                                             line++; //seal L - CA, S - SH, M - CU
                                         }
                                     }
@@ -188,17 +187,17 @@
                                         edi += "FTX+AAA+++" + $.trim(cleanString(rowCells[12])) + "'\n"; 
                                         line++;
                                     }
-                                    if (typeof rowCells[17] != "undefined" && $.trim(rowCells[17]) != "" && $.trim(rowCells[17]) != "/") { 
-                                        edi += "FTX+HAN++" + rowCells[17] + "'\n"; 
+                                    if (typeof rowCells[18] != "undefined" && $.trim(rowCells[18]) != "" && $.trim(rowCells[18]) != "/") { 
+                                        edi += "FTX+HAN++" + rowCells[18] + "'\n"; 
                                         line++;
                                     }
                                     if (typeof rowCells[14] != "undefined" && rowCells[14] != "" && $.trim(rowCells[14]) != "/") { 
                                         tmp = rowCells[14].split('/'); 
-                                        edi += "DGS+IMD+" + tmp[0] + "+" + tmp[1] + "'\n";
+                                        edi += "DGS+IMD+" + tmp[0] + "+" + tmp[1] + "'\n"; 
                                         line++;
                                     }
                                     if (typeof rowCells[3] != "undefined" && $.trim(rowCells[3]) != "") { 
-                                        edi += "NAD+CF+" + rowCells[3] + ":160:ZZZ'\n";
+                                        edi += "NAD+CF+" + rowCells[3] + ":160:ZZZ'\n"; 
                                         line++;
                                     } //box 
                                     //if(opr!="") { edi += "NAD+CA+"+opr+":160:ZZZ'\n"; line++; } //vsl
@@ -362,7 +361,7 @@
                 <div class="form-group">
                     <label for="my_file_input">Export booking excel file:</label>
                     <input class="form-control" type="file" id="my_file_input" />
-                    <p><small><a href="sample_new.xlsx">Sample Excel (ETP 3.0)</a></small></p>
+                    <p><small><a href="sample.xlsx">Sample Excel</a></small></p>
                 </div>
                 <div class="form-group"><textarea class="form-control" rows="20" cols="40" id='my_file_output'></textarea></div>
             </div>
