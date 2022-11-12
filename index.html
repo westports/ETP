@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 
@@ -97,9 +98,9 @@
 
                             try {
                                 let rowCells = CSVtoArray(allRows[singleRow]);
-                                // if (singleRow == 8) {
-                                //     console.log(singleRow, rowCells);
-                                // }
+//                                 if (singleRow == 8) {
+//                                     console.log(singleRow, rowCells);
+//                                 }
                                 if (singleRow > 8) {
                                     contcount++;
                                     //rowCells[3] //5 - F, 4 - E
@@ -126,7 +127,7 @@
                                         line++;
                                     }
                                     if (typeof rowCells[13] != "undefined") { 
-                                        edi += "MEA+AAE+VGM+KGM:" + rowCells[13] + "'\n"; 
+                                        edi += "MEA+AAE+VGM+KGM:" + rowCells[13].replace(/,/g, '') + "'\n"; 
                                         line++;
                                     }
                                     if (typeof rowCells[17] != "undefined" && $.trim(rowCells[17]) != "" && $.trim(rowCells[17]) != "/") { 
